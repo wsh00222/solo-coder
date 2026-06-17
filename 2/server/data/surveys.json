@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sample-1",
+    "title": "用户满意度调查",
+    "description": "感谢您抽出宝贵时间参与我们的用户满意度调查，您的反馈对我们非常重要！",
+    "anonymous": true,
+    "published": true,
+    "createdAt": "2024-01-15T10:30:00.000Z",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "title": "您对我们产品的整体满意度如何？",
+        "required": true,
+        "options": ["非常满意", "满意", "一般", "不满意", "非常不满意"]
+      },
+      {
+        "id": "q2",
+        "type": "multiple",
+        "title": "您最常使用我们产品的哪些功能？（可多选）",
+        "required": true,
+        "options": ["数据统计", "任务管理", "团队协作", "文件存储", "消息通知"]
+      },
+      {
+        "id": "q3",
+        "type": "text",
+        "title": "您对我们有什么建议或意见？",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "sample-2",
+    "title": "员工工作环境调查",
+    "description": "为了更好地了解大家的工作状态，我们组织了这次匿名调查，请如实填写。",
+    "anonymous": true,
+    "published": false,
+    "createdAt": "2024-02-20T14:00:00.000Z",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "title": "您对当前办公环境的满意度？",
+        "required": true,
+        "options": ["非常满意", "满意", "一般", "不满意"]
+      },
+      {
+        "id": "q2",
+        "type": "multiple",
+        "title": "您认为公司需要改善哪些方面？（可多选）",
+        "required": true,
+        "options": ["办公设备", "休息区域", "食堂餐饮", "交通补贴", "培训机会"]
+      },
+      {
+        "id": "q3",
+        "type": "text",
+        "title": "请分享您的其他想法：",
+        "required": false
+      }
+    ]
+  }
+]
