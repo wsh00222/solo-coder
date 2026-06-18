@@ -1,0 +1,70 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "肖申克的救赎",
+      "director": "弗兰克·德拉邦特",
+      "year": 1994,
+      "genre": "剧情",
+      "rating": 10,
+      "watchDate": "2023-06-15",
+      "status": "已看",
+      "notes": "希望是美好的，也许是人间至善，而美好的事物永不消逝。",
+      "createdAt": "2026-06-18T07:58:45.816Z",
+      "updatedAt": "2026-06-18T07:58:45.816Z"
+    },
+    {
+      "id": 2,
+      "title": "星际穿越",
+      "director": "克里斯托弗·诺兰",
+      "year": 2014,
+      "genre": "科幻",
+      "rating": 9,
+      "watchDate": "2024-03-20",
+      "status": "二刷",
+      "notes": "不要温和地走进那个良夜。",
+      "createdAt": "2026-06-18T07:58:45.816Z",
+      "updatedAt": "2026-06-18T07:58:45.817Z"
+    },
+    {
+      "id": 3,
+      "title": "盗梦空间",
+      "director": "克里斯托弗·诺兰",
+      "year": 2010,
+      "genre": "科幻",
+      "rating": 9,
+      "watchDate": "2023-11-08",
+      "status": "已看",
+      "notes": "多层梦境的烧脑神作。",
+      "createdAt": "2026-06-18T07:58:45.817Z",
+      "updatedAt": "2026-06-18T07:58:45.817Z"
+    },
+    {
+      "id": 4,
+      "title": "流浪地球3",
+      "director": "郭帆",
+      "year": 2025,
+      "genre": "科幻",
+      "rating": null,
+      "watchDate": null,
+      "status": "想看",
+      "notes": "期待中国科幻的又一里程碑。",
+      "createdAt": "2026-06-18T07:58:45.817Z",
+      "updatedAt": "2026-06-18T07:58:45.817Z"
+    },
+    {
+      "id": 5,
+      "title": "疯狂的石头",
+      "director": "宁浩",
+      "year": 2006,
+      "genre": "喜剧",
+      "rating": 8,
+      "watchDate": "2024-01-12",
+      "status": "已看",
+      "notes": "国产黑色幽默的巅峰之作。",
+      "createdAt": "2026-06-18T07:58:45.817Z",
+      "updatedAt": "2026-06-18T07:58:45.817Z"
+    }
+  ],
+  "nextId": 6
+}
