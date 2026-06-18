@@ -1,0 +1,60 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "title": "欢迎使用笔记管理工具",
+      "content": "这是一个简洁高效的个人笔记管理工具。\n\n主要功能：\n- 创建、编辑、删除笔记\n- 按标题搜索\n- 按标签筛选\n- 查看统计信息\n\n更多资料请访问官方文档：https://example.com/docs\n\n祝你使用愉快！",
+      "tags": "教程,入门",
+      "createdAt": 1781599160686,
+      "updatedAt": 1781599160686
+    },
+    {
+      "id": 2,
+      "title": "JavaScript 数组常用方法",
+      "content": "本文整理了 JavaScript 数组中最常用的几个方法：\n\n1. map() - 映射转换\n2. filter() - 过滤\n3. reduce() - 归并\n4. find() - 查找元素\n5. includes() - 判断包含\n\n参考链接：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array",
+      "tags": "编程,JavaScript",
+      "createdAt": 1781685560686,
+      "updatedAt": 1781685560686
+    },
+    {
+      "id": 3,
+      "title": "本周工作计划",
+      "content": "周一：完成项目需求评审\n周二：编写 API 接口文档，参考 https://swagger.io/\n周三：前端页面开发\n周四：前后端联调\n周五：代码评审和测试\n\n周末安排休息，保持良好工作节奏。",
+      "tags": "工作,计划",
+      "createdAt": 1781768360686,
+      "updatedAt": 1781768360686
+    },
+    {
+      "id": 4,
+      "title": "Python ??????",
+      "content": "Python ????????????? https://www.python.org/doc/",
+      "tags": "??,Python",
+      "createdAt": 1781772571214,
+      "updatedAt": 1781772571214
+    },
+    {
+      "id": 5,
+      "title": "????:?????????",
+      "content": "?????? 3 ?,??????????,?????",
+      "tags": "??,????",
+      "createdAt": 1781772571271,
+      "updatedAt": 1781772571271
+    },
+    {
+      "id": 6,
+      "title": "?????? 2026-06-18",
+      "content": "????????????,???? React + FastAPI ?????????????",
+      "tags": "??,??",
+      "createdAt": 1781772571278,
+      "updatedAt": 1781772571278
+    },
+    {
+      "id": 7,
+      "title": "测试新建笔记功能",
+      "content": "这是一篇测试笔记，用来验证新建笔记和 Toast 提示功能。\n\n文档地址：https://react.dev/",
+      "tags": "测试,功能",
+      "createdAt": 1781772752085,
+      "updatedAt": 1781772752085
+    }
+  ]
+}

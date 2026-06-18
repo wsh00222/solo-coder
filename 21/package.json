@@ -1,0 +1,15 @@
+{
+  "name": "book-collection-app",
+  "version": "1.0.0",
+  "description": "个人书籍收藏管理系统 - React + Express",
+  "scripts": {
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "install:all": "npm run install:server && npm run install:client",
+    "start:server": "cd server && node server.js",
+    "start:client": "cd client && npm run dev",
+    "build:client": "cd client && npm run build"
+  },
+  "keywords": ["books", "collection", "react", "express"],
+  "license": "MIT"
+}

@@ -1,0 +1,86 @@
+.book-form {
+  padding: 0;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-group-half {
+  flex: 1;
+}
+
+.input-error {
+  border-color: #e74c3c !important;
+}
+
+.form-error-inline {
+  color: #e74c3c;
+  font-weight: 400;
+  font-size: 13px;
+  margin-left: 8px;
+}
+
+.status-options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.status-option {
+  padding: 12px 24px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #f8f9fa;
+}
+
+.status-option:hover {
+  border-color: var(--status-color);
+  background: white;
+}
+
+.status-option.selected {
+  border-color: var(--status-color);
+  background: var(--status-color);
+}
+
+.status-option.selected .status-text {
+  color: white;
+}
+
+.status-text {
+  font-weight: 600;
+  font-size: 14px;
+  color: #495057;
+}
+
+.rating-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px;
+  background: #fef9e7;
+  border-radius: 12px;
+}
+
+.rating-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #f39c12;
+}
+
+.form-hint {
+  font-size: 12px;
+  color: #adb5bd;
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
