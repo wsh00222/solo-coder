@@ -1,0 +1,14 @@
+{
+  "name": "book-manager-backend",
+  "version": "1.0.0",
+  "description": "个人书单与阅读记录管理器 - 后端服务",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  }
+}
