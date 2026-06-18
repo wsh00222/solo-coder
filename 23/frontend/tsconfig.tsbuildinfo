@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/api.ts","./src/main.tsx","./src/types.ts","./src/components/activitycard.tsx","./src/components/activitydetail.tsx","./src/components/activityform.tsx","./src/components/confirmdialog.tsx","./src/components/modal.tsx","./src/components/registerform.tsx","./src/components/statsbar.tsx","./src/components/toast.tsx"],"version":"5.9.3"}
