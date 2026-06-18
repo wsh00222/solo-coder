@@ -1,0 +1,45 @@
+{
+  "members": [
+    {
+      "id": 1,
+      "name": "张伟",
+      "position": "前端工程师",
+      "phone": "13810001001",
+      "email": "zhangwei@example.com",
+      "department": "研发"
+    },
+    {
+      "id": 2,
+      "name": "李娜",
+      "position": "产品经理",
+      "phone": "13920002002",
+      "email": "lina@example.com",
+      "department": "市场"
+    },
+    {
+      "id": 3,
+      "name": "王强",
+      "position": "运营主管",
+      "phone": "13730003003",
+      "email": "wangqiang@example.com",
+      "department": "运营"
+    },
+    {
+      "id": 4,
+      "name": "赵敏",
+      "position": "后端工程师",
+      "phone": "13640004004",
+      "email": "zhaomin@example.com",
+      "department": "研发"
+    },
+    {
+      "id": 5,
+      "name": "刘洋",
+      "position": "行政助理",
+      "phone": "13550005005",
+      "email": "liuyang@example.com",
+      "department": "其他"
+    }
+  ],
+  "nextId": 6
+}
