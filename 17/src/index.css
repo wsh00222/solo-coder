@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+      'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .animate-highlight {
+    animation: highlight 2s ease-in-out;
+  }
+
+  @keyframes highlight {
+    0% {
+      background-color: rgb(254 243 199);
+      border-color: rgb(251 191 36);
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+    }
+    50% {
+      background-color: rgb(254 243 199);
+      border-color: rgb(251 191 36);
+    }
+    100% {
+      background-color: white;
+      border-color: rgb(241 245 249);
+      box-shadow: none;
+    }
+  }
+}
