@@ -1,0 +1,81 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "title": "欢迎使用知识笔记",
+      "content": "这是一款轻量级的个人知识笔记管理工具。\n\n## 主要功能\n- 📝 创建、编辑、删除笔记\n- 🏷️ 标签分类管理\n- 🔍 关键词搜索\n- 📊 统计信息面板\n\n## 快速开始\n1. 点击右上角\"新建笔记\"按钮\n2. 输入标题和内容\n3. 添加标签便于分类\n4. 使用搜索框快速查找\n\n官方网站: https://example.com\n",
+      "created_at": "2026-06-18 08:06",
+      "updated_at": "2026-06-18 09:06"
+    },
+    {
+      "id": 2,
+      "title": "JavaScript 异步编程总结",
+      "content": "JavaScript 异步编程的几种方式：\n\n1. 回调函数 (Callback)\n   最基础的异步方式，但容易产生回调地狱。\n\n2. Promise\n   then/catch 链式调用，状态一旦改变不可逆转。\n   参考：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise\n\n3. async/await\n   基于 Promise 的语法糖，让异步代码看起来像同步。\n\nasync function fetchData() {\n  try {\n    const res = await fetch('/api/data');\n    const data = await res.json();\n    return data;\n  } catch (err) {\n    console.error(err);\n  }\n}\n",
+      "created_at": "2026-06-16 11:20",
+      "updated_at": "2026-06-16 13:20"
+    },
+    {
+      "id": 3,
+      "title": "本周学习计划",
+      "content": "## 周一至周三\n- 复习 Vue 3 Composition API\n- 完成项目原型设计\n\n## 周四至周五\n- 后端 API 开发\n- 数据库表结构优化\n\n## 周末\n- 代码 Review\n- 写技术博客一篇\n\n相关资源: https://vuejs.org\n",
+      "created_at": "2026-06-13 17:58",
+      "updated_at": "2026-06-13 20:58"
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "入门"
+    },
+    {
+      "id": 2,
+      "name": "使用指南"
+    },
+    {
+      "id": 3,
+      "name": "JavaScript"
+    },
+    {
+      "id": 4,
+      "name": "编程"
+    },
+    {
+      "id": 5,
+      "name": "计划"
+    },
+    {
+      "id": 6,
+      "name": "学习"
+    }
+  ],
+  "noteTags": [
+    {
+      "note_id": 1,
+      "tag_id": 1
+    },
+    {
+      "note_id": 1,
+      "tag_id": 2
+    },
+    {
+      "note_id": 2,
+      "tag_id": 3
+    },
+    {
+      "note_id": 2,
+      "tag_id": 4
+    },
+    {
+      "note_id": 3,
+      "tag_id": 5
+    },
+    {
+      "note_id": 3,
+      "tag_id": 6
+    }
+  ],
+  "_counters": {
+    "noteId": 3,
+    "tagId": 6
+  }
+}
