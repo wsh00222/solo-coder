@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "version": 1,
+    "createdAt": "2026-06-18T08:07:30.700Z"
+  },
+  "equipment": [
+    {
+      "id": 1,
+      "name": "投影仪",
+      "code": "EQ-2024-001",
+      "model": "EPSON CB-X51",
+      "location": "A区-3楼-会议室301",
+      "status": "available",
+      "created_at": "2026-06-18 16:07:30",
+      "updated_at": "2026-06-18 16:07:30"
+    },
+    {
+      "id": 2,
+      "name": "笔记本电脑",
+      "code": "EQ-2024-002",
+      "model": "ThinkPad X1 Carbon",
+      "location": "B区-2楼-IT部",
+      "status": "borrowed",
+      "created_at": "2026-06-18 16:07:30",
+      "updated_at": "2026-06-18 16:07:30"
+    },
+    {
+      "id": 3,
+      "name": "单反相机",
+      "code": "EQ-2024-003",
+      "model": "Canon EOS R6",
+      "location": "C区-1楼-市场部",
+      "status": "borrowed",
+      "created_at": "2026-06-18 16:07:30",
+      "updated_at": "2026-06-18 16:07:30"
+    },
+    {
+      "id": 4,
+      "name": "移动工作站",
+      "code": "EQ-2024-004",
+      "model": "Dell Precision 7780",
+      "location": "A区-3楼-研发部",
+      "status": "maintenance",
+      "created_at": "2026-06-18 16:07:30",
+      "updated_at": "2026-06-18 16:07:30"
+    }
+  ],
+  "borrowRecords": [
+    {
+      "id": 1,
+      "equipment_id": 2,
+      "borrower": "张三",
+      "reason": "外出拜访客户做演示",
+      "borrow_date": "2026-06-15",
+      "expected_return_date": "2026-06-17",
+      "actual_return_date": null,
+      "status": "borrowing",
+      "created_at": "2026-06-18 16:07:30",
+      "updated_at": "2026-06-18 16:07:30"
+    },
+    {
+      "id": 2,
+      "equipment_id": 3,
+      "borrower": "李四",
+      "reason": "拍摄年会宣传视频",
+      "borrow_date": "2026-06-17",
+      "expected_return_date": "2026-06-23",
+      "actual_return_date": null,
+      "status": "borrowing",
+      "created_at": "2026-06-18 16:07:30",
+      "updated_at": "2026-06-18 16:07:30"
+    },
+    {
+      "id": 3,
+      "equipment_id": 2,
+      "borrower": "王五",
+      "reason": "内部培训使用",
+      "borrow_date": "2026-06-03",
+      "expected_return_date": "2026-06-08",
+      "actual_return_date": "2026-06-07",
+      "status": "returned",
+      "created_at": "2026-06-18 16:07:30",
+      "updated_at": "2026-06-18 16:07:30"
+    },
+    {
+      "id": 4,
+      "equipment_id": 1,
+      "borrower": "赵六",
+      "reason": "季度会议使用",
+      "borrow_date": "2026-05-19",
+      "expected_return_date": "2026-05-24",
+      "actual_return_date": "2026-05-23",
+      "status": "returned",
+      "created_at": "2026-06-18 16:07:30",
+      "updated_at": "2026-06-18 16:07:30"
+    }
+  ],
+  "sequences": {
+    "equipment": 4,
+    "borrowRecord": 4
+  }
+}
