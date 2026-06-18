@@ -11,22 +11,22 @@ export interface PlanWithProgress extends Plan {
 }
 
 export const PlanService = {
-  getAll(goal?: string): PlanWithProgress[] {
-    let plans = PlanModel.getAll();
+  async getAll(goal?: string): Promise<PlanWithProgress[]> {
+    let plans = await PlanModel.getAll();
     if (goal && goal !== 'all') {
       plans = plans.filter(p => p.goal === goal);
     }
-    return plans.map(p => this.withProgress(p));
+    return Promise.all(plans.map(p => this.withProgress(p)));
   },
 
-  getById(id: number): PlanWithProgress | undefined {
-    const plan = PlanModel.getById(id);
+  async getById(id: number): Promise<PlanWithProgress | undefined> {
+    const plan = await PlanModel.getById(id);
     if (!plan) return undefined;
     return this.withProgress(plan);
   },
 
-  withProgress(plan: Plan): PlanWithProgress {
-    const records = RecordModel.getAllByPlanId(plan.id);
+  async withProgress(plan: Plan): Promise<PlanWithProgress> {
+    const records = await RecordModel.getAllByPlanId(plan.id);
     const totalRecords = records.length;
 
     const today = getServerDate();
@@ -51,23 +51,23 @@ export const PlanService = {
     };
   },
 
-  create(input: CreatePlanInput): PlanWithProgress {
-    const plan = PlanModel.create(input);
+  async create(input: CreatePlanInput): Promise<PlanWithProgress> {
+    const plan = await PlanModel.create(input);
     return this.withProgress(plan);
   },
 
-  update(id: number, input: UpdatePlanInput): PlanWithProgress | undefined {
-    const plan = PlanModel.update(id, input);
+  async update(id: number, input: UpdatePlanInput): Promise<PlanWithProgress | undefined> {
+    const plan = await PlanModel.update(id, input);
     if (!plan) return undefined;
     return this.withProgress(plan);
   },
 
-  remove(id: number): boolean {
+  async remove(id: number): Promise<boolean> {
     return PlanModel.remove(id);
   },
 
-  duplicate(id: number): PlanWithProgress | undefined {
-    const plan = PlanModel.getById(id);
+  async duplicate(id: number): Promise<PlanWithProgress | undefined> {
+    const plan = await PlanModel.getById(id);
     if (!plan) return undefined;
 
     const today = getServerDate();

@@ -1,4 +1,4 @@
-import { db } from '../db';
+import { getDb, scheduleSave } from '../db';
 import { getServerDateTime } from '../utils/date';
 
 export interface Record {
@@ -32,36 +32,77 @@ export interface RecordFilters {
   minFeeling?: number;
 }
 
+function toRecord(row: any): Record {
+  return {
+    id: row.id,
+    plan_id: row.plan_id,
+    date: row.date,
+    duration: row.duration,
+    content: row.content,
+    feeling: row.feeling ?? null,
+    created_at: row.created_at,
+    updated_at: row.updated_at,
+  };
+}
+
+async function query<T>(sql: string, params: any[] = []): Promise<T[]> {
+  const db = await getDb();
+  const stmt = db.prepare(sql);
+  stmt.bind(params);
+  const rows: T[] = [];
+  while (stmt.step()) {
+    rows.push(stmt.getAsObject() as unknown as T);
+  }
+  stmt.free();
+  return rows;
+}
+
+async function run(sql: string, params: any[] = []): Promise<{ lastInsertRowid: number; changes: number }> {
+  const db = await getDb();
+  const stmt = db.prepare(sql);
+  stmt.bind(params);
+  stmt.step();
+  stmt.free();
+  const info = db.exec('SELECT last_insert_rowid() AS lid, changes() AS ch');
+  scheduleSave();
+  const row = info[0]?.values[0] as any;
+  return { lastInsertRowid: row?.[0] ?? 0, changes: row?.[1] ?? 0 };
+}
+
 export const RecordModel = {
-  getAllByPlanId(planId: number, filters?: RecordFilters): Record[] {
+  async getAllByPlanId(planId: number, filters?: RecordFilters): Promise<Record[]> {
     let sql = 'SELECT * FROM records WHERE plan_id = ?';
     const params: any[] = [planId];
     if (filters?.startDate) { sql += ' AND date >= ?'; params.push(filters.startDate); }
     if (filters?.endDate) { sql += ' AND date <= ?'; params.push(filters.endDate); }
     if (filters?.minFeeling) { sql += ' AND feeling >= ?'; params.push(filters.minFeeling); }
     sql += ' ORDER BY date DESC, created_at DESC';
-    return db.prepare(sql).all(...params) as Record[];
+    const rows = await query<any>(sql, params);
+    return rows.map(toRecord);
   },
 
-  getById(id: number): Record | undefined {
-    return db.prepare('SELECT * FROM records WHERE id = ?').get(id) as Record | undefined;
+  async getById(id: number): Promise<Record | undefined> {
+    const rows = await query<any>('SELECT * FROM records WHERE id = ?', [id]);
+    return rows.length ? toRecord(rows[0]) : undefined;
   },
 
-  getByPlanAndDate(planId: number, date: string): Record | undefined {
-    return db.prepare('SELECT * FROM records WHERE plan_id = ? AND date = ?').get(planId, date) as Record | undefined;
+  async getByPlanAndDate(planId: number, date: string): Promise<Record | undefined> {
+    const rows = await query<any>('SELECT * FROM records WHERE plan_id = ? AND date = ?', [planId, date]);
+    return rows.length ? toRecord(rows[0]) : undefined;
   },
 
-  create(input: CreateRecordInput): Record {
+  async create(input: CreateRecordInput): Promise<Record> {
     const now = getServerDateTime();
-    const result = db.prepare(`
-      INSERT INTO records (plan_id, date, duration, content, feeling, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `).run(input.plan_id, input.date, input.duration, input.content, input.feeling ?? null, now, now);
-    return this.getById(result.lastInsertRowid as number)!;
+    const result = await run(
+      `INSERT INTO records (plan_id, date, duration, content, feeling, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [input.plan_id, input.date, input.duration, input.content, input.feeling ?? null, now, now]
+    );
+    return (await this.getById(result.lastInsertRowid))!;
   },
 
-  update(id: number, input: UpdateRecordInput): Record | undefined {
-    const record = this.getById(id);
+  async update(id: number, input: UpdateRecordInput): Promise<Record | undefined> {
+    const record = await this.getById(id);
     if (!record) return undefined;
     const now = getServerDateTime();
     const fields: string[] = [];
@@ -71,29 +112,29 @@ export const RecordModel = {
     if (input.feeling !== undefined) { fields.push('feeling = ?'); values.push(input.feeling ?? null); }
     fields.push('updated_at = ?'); values.push(now);
     values.push(id);
-    db.prepare(`UPDATE records SET ${fields.join(', ')} WHERE id = ?`).run(...values);
+    await run(`UPDATE records SET ${fields.join(', ')} WHERE id = ?`, values);
     return this.getById(id);
   },
 
-  upsert(input: CreateRecordInput): Record {
-    const existing = this.getByPlanAndDate(input.plan_id, input.date);
+  async upsert(input: CreateRecordInput): Promise<Record> {
+    const existing = await this.getByPlanAndDate(input.plan_id, input.date);
     if (existing) {
-      return this.update(existing.id, { duration: input.duration, content: input.content, feeling: input.feeling })!;
+      return (await this.update(existing.id, { duration: input.duration, content: input.content, feeling: input.feeling }))!;
     }
     return this.create(input);
   },
 
-  remove(id: number): boolean {
-    const result = db.prepare('DELETE FROM records WHERE id = ?').run(id);
+  async remove(id: number): Promise<boolean> {
+    const result = await run('DELETE FROM records WHERE id = ?', [id]);
     return result.changes > 0;
   },
 
-  getAllDates(): string[] {
-    const rows = db.prepare('SELECT DISTINCT date FROM records ORDER BY date DESC').all() as { date: string }[];
+  async getAllDates(): Promise<string[]> {
+    const rows = await query<any>('SELECT DISTINCT date FROM records ORDER BY date DESC');
     return rows.map(r => r.date);
   },
 
-  getAll(filters?: RecordFilters & { planId?: number }): Record[] {
+  async getAll(filters?: RecordFilters & { planId?: number }): Promise<Record[]> {
     let sql = 'SELECT * FROM records WHERE 1=1';
     const params: any[] = [];
     if (filters?.planId) { sql += ' AND plan_id = ?'; params.push(filters.planId); }
@@ -101,6 +142,7 @@ export const RecordModel = {
     if (filters?.endDate) { sql += ' AND date <= ?'; params.push(filters.endDate); }
     if (filters?.minFeeling) { sql += ' AND feeling >= ?'; params.push(filters.minFeeling); }
     sql += ' ORDER BY date DESC, created_at DESC';
-    return db.prepare(sql).all(...params) as Record[];
+    const rows = await query<any>(sql, params);
+    return rows.map(toRecord);
   }
 };

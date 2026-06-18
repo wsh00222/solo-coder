@@ -32,13 +32,13 @@ function randomPick<T>(arr: T[]): T {
   return arr[randomInt(0, arr.length - 1)];
 }
 
-export function seedSampleDataIfEmpty() {
-  if (PlanModel.count() > 0) return;
+export async function seedSampleDataIfEmpty() {
+  if ((await PlanModel.count()) > 0) return;
 
   const today = getServerDate();
   const twoWeeksAgo = addDays(today, -14);
 
-  const musclePlan = PlanModel.create({
+  const musclePlan = await PlanModel.create({
     name: '夏季增肌计划',
     goal: '增肌',
     weekly_frequency: 4,
@@ -46,7 +46,7 @@ export function seedSampleDataIfEmpty() {
     end_date: addDays(today, 60),
   });
 
-  const fatlossPlan = PlanModel.create({
+  const fatlossPlan = await PlanModel.create({
     name: '减脂塑形计划',
     goal: '减脂',
     weekly_frequency: 5,
@@ -56,7 +56,7 @@ export function seedSampleDataIfEmpty() {
 
   const muscleDates = pickRandomDates(addDays(twoWeeksAgo, 1), today, 5);
   for (const d of muscleDates) {
-    RecordModel.create({
+    await RecordModel.create({
       plan_id: musclePlan.id,
       date: d,
       duration: randomInt(50, 90),
@@ -67,7 +67,7 @@ export function seedSampleDataIfEmpty() {
 
   const fatlossDates = pickRandomDates(twoWeeksAgo, today, 4);
   for (const d of fatlossDates) {
-    RecordModel.create({
+    await RecordModel.create({
       plan_id: fatlossPlan.id,
       date: d,
       duration: randomInt(30, 60),

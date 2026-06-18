@@ -1,6 +1,10 @@
-import Database from 'better-sqlite3';
+import initSqlJs, { Database } from 'sql.js';
 import path from 'path';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const dataDir = path.resolve(process.cwd(), 'data');
 if (!fs.existsSync(dataDir)) {
@@ -8,13 +12,49 @@ if (!fs.existsSync(dataDir)) {
 }
 
 const dbPath = path.join(dataDir, 'fitness.db');
-export const db = new Database(dbPath);
 
-db.pragma('journal_mode = WAL');
-db.pragma('foreign_keys = ON');
+let db: Database | null = null;
+type SqlJsStaticType = typeof initSqlJs extends (config: any) => Promise<infer T> ? T : never;
+let SQL: SqlJsStaticType | null = null;
 
-export function initDatabase() {
-  db.exec(`
+export async function getDb(): Promise<Database> {
+  if (db) return db;
+
+  const sqlJsPkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'node_modules', 'sql.js', 'package.json'), 'utf8'));
+  const wasmDir = path.resolve(process.cwd(), 'node_modules', 'sql.js', 'dist');
+
+  SQL = await initSqlJs({
+    locateFile: (file: string) => path.join(wasmDir, file),
+  });
+
+  if (fs.existsSync(dbPath)) {
+    const buf = fs.readFileSync(dbPath);
+    db = new SQL.Database(buf);
+  } else {
+    db = new SQL.Database();
+  }
+
+  return db;
+}
+
+export function saveDb() {
+  if (!db) return;
+  const data = db.export();
+  const buf = Buffer.from(data);
+  fs.writeFileSync(dbPath, buf);
+}
+
+let saveTimer: any = null;
+export function scheduleSave() {
+  if (saveTimer) clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    saveDb();
+  }, 200);
+}
+
+export async function initDatabase() {
+  const database = await getDb();
+  database.run(`
     CREATE TABLE IF NOT EXISTS plans (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
@@ -38,8 +78,9 @@ export function initDatabase() {
       FOREIGN KEY (plan_id) REFERENCES plans(id) ON DELETE CASCADE,
       UNIQUE(plan_id, date)
     );
-
-    CREATE INDEX IF NOT EXISTS idx_records_plan_id ON records(plan_id);
-    CREATE INDEX IF NOT EXISTS idx_records_date ON records(date);
   `);
+  scheduleSave();
 }
+
+process.on('exit', () => saveDb());
+process.on('SIGINT', () => { saveDb(); process.exit(); });
