@@ -1,0 +1,49 @@
+{
+  "nextId": 5,
+  "books": [
+    {
+      "id": 1,
+      "title": "三体",
+      "author": "刘慈欣",
+      "year": 2008,
+      "genre": "小说",
+      "rating": 5,
+      "status": "读完",
+      "createdAt": "2026-06-18T08:53:32.162Z",
+      "updatedAt": "2026-06-18T08:53:32.162Z"
+    },
+    {
+      "id": 2,
+      "title": "深入理解计算机系统",
+      "author": "Randal E. Bryant",
+      "year": 2016,
+      "genre": "科技",
+      "rating": 5,
+      "status": "在读",
+      "createdAt": "2026-06-18T08:53:32.162Z",
+      "updatedAt": "2026-06-18T08:53:32.162Z"
+    },
+    {
+      "id": 3,
+      "title": "家常菜大全",
+      "author": "美食生活编辑部",
+      "year": 2020,
+      "genre": "生活",
+      "rating": 3,
+      "status": "想读",
+      "createdAt": "2026-06-18T08:53:32.162Z",
+      "updatedAt": "2026-06-18T08:53:32.162Z"
+    },
+    {
+      "id": 4,
+      "title": "人类简史",
+      "author": "尤瓦尔·赫拉利",
+      "year": 2014,
+      "genre": "其他",
+      "rating": 4,
+      "status": "读完",
+      "createdAt": "2026-06-18T08:53:32.162Z",
+      "updatedAt": "2026-06-18T08:53:32.162Z"
+    }
+  ]
+}
